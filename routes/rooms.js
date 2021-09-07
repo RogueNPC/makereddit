@@ -5,6 +5,7 @@ const router = express.Router();
 const posts = require('./posts');
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
+const Post = require('../models/post');
 
 // Rooms index
 router.get('/', (req, res, next) => {
@@ -28,7 +29,11 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
     Room.findById(req.params.id, function(err, room) {
       if(err) { console.error(err) };
   
-      res.render('rooms/show', { room: room });
+        Post.find({ room: room }, function(err, posts) {
+            if(err) { console.error(err) };
+    
+            res.render('rooms/show', { room: room, posts: posts });
+        });
     });
 });
 

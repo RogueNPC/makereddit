@@ -1,7 +1,16 @@
 <div>
-  <h2>{{room.topic}}</h2>
+  <h1>{{room.topic}}</h1>
 </div>
 
 <div>
-  Coming soon: posts!
+  {{#each posts as |post|}}
+    <div class="post-div">
+      <h3>{{post.subject}}</h3>
+      <p>{{post.body}}</p>
+    </div>
+  {{/each}}
+</div>
+
+<div>
+  <a href="/rooms/{{room.id}}/posts/new">New Post</a>
 </div>
