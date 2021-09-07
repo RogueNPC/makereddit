@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+// Add this line to require the Posts controller
+const posts = require('./posts');
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
 
@@ -58,5 +60,8 @@ router.post('/', auth.requireLogin, (req, res, next) => {
       return res.redirect('/rooms');
     });
 });
+
+// Add this line to nest the routes
+router.use('/:roomId/posts', posts)
 
 module.exports = router;
