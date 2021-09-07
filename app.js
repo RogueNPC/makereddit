@@ -38,4 +38,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// Database setup
+const mongoose = require('mongoose');
+const mongoURI = 'mongodb+srv://ms-user:makeschool@cluster0.z5xic.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+mongoose.connect(mongoURI)
+mongoose.Promise = global.Promise;
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 module.exports = app;
