@@ -32,7 +32,11 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
 
 // Rooms edit
 router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
-  // TODO
+    Room.findById(req.params.id, function(err, room) {
+        if(err) { console.error(err) };
+    
+        res.render('rooms/edit', { room: room });
+    });
 });
 
 // Rooms update
