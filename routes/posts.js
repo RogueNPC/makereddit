@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
+
+// Add this line to require the Comments controller
+const comments = require('./comments');
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
 const Post = require('../models/post');
@@ -28,5 +31,8 @@ router.post('/', auth.requireLogin, (req, res, next) => {
         });
     });
 })
+
+// Add this line to nest the routes
+router.use('/:postId/comments', comments)
 
 module.exports = router;
