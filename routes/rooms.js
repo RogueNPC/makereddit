@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 
 // Rooms new
 router.get('/new', auth.requireLogin, (req, res, next) => {
-  // TODO
+    res.render('rooms/new');
 });
 
 // Rooms show
