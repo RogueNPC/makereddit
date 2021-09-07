@@ -31,7 +31,13 @@ router.post('/:id', auth.requireLogin, (req, res, next) => {
 
 // Rooms create
 router.post('/', auth.requireLogin, (req, res, next) => {
-  // TODO
+    let room = new Room(req.body);
+  
+    room.save(function(err, room) {
+      if(err) { console.error(err) };
+  
+      return res.redirect('/rooms');
+    });
 });
 
 module.exports = router;
