@@ -32,6 +32,19 @@ router.post('/', auth.requireLogin, (req, res, next) => {
     });
 })
 
+// Posts voting
+router.post('/:id', auth.requireLogin, (req, res, next) => {
+    Post.findById(req.params.id, function(err, post) {
+        post.points += parseInt(req.body.points);
+    
+        post.save(function(err, post) {
+            if(err) { console.error(err) };
+    
+            return res.redirect(`/rooms/${post.room}`);
+        });
+    });
+});
+
 // Add this line to nest the routes
 router.use('/:postId/comments', comments)
 
